@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <style type="text/css">
+        	#container{
+        		width:278px;
+        		height:600px;
+        		background:url('background.jpg') no-repeat center center;
+        		position:relative;
+        		margin:auto;
+        	}
+
+        	#content{
+        		width:230px;
+        		height:370px;
+        		overflow-y:scroll;
+        		position:absolute;
+        		left: 20px;
+   				top: 103px;
+        	}
+
+        	#footer{
+        		height:30px;
+        		width:230px;
+        		position:absolute;
+        		border-top:1px solid #eee;
+        		left: 20px;
+   				top: 473px;
+        	}
+
+        	#avatar{
+        		width: 24px; 
+                height: 24px; 
+                border: 1px solid gray; 
+                border-radius: 5px;
+                padding: 2px; 
+                vertical-align: middle;  /*把此元素放置在父元素的中部*/
+                cursor: pointer;   /*光标呈现为指示链接的指针（一只手）*/
+                float:left;
+                padding:2px;
+        	 }  
+
+        	#message{
+        		width:170px;
+        		height:22px;
+        		float:left;
+        		vertical-align: middle;
+        		font-size: 12px; 
+                margin-left:4px;
+        	}
+
+        	#send{
+        		height:30px;
+        		width:50px;
+        		cursor: pointer;
+        		float:left;
+        		vertical-align: middle;
+        	}
+
+        	#content p { 
+                       margin: 2px; 
+                }
+
+            #content span {
+                          font-size: 14px; 
+                          display: inline-block; 
+                          padding: 5px; 
+                          border: 1px solid gray; 
+                          border-radius: 5px; 
+                          margin: 3px;
+                          max-width: 75%; 
+                          vertical-align: top; 
+                          word-wrap: break-word;
+                 }
+
+             #content img { 
+                        height: 24px; 
+                        width: 24px; 
+                        border: 1px solid gray; 
+                        border-radius: 5px; 
+                        padding: 2px; 
+                        margin: 3px; 
+                        vertical-align: top; 
+                    }
+        </style>
+
+        <script src="jquery-1.11.3.js"></script>
+        <script type="text/javascript">
+                window.onload = function(){
+                    var oContent = document.getElementById('content');
+                    // var oAvatar = document.getElementById('avatar');
+                    var oMessage = document.getElementById('message');
+                    var oSend = document.getElementById('send');
+                    var onOff = true;  //开关 利用这个开关进行头像图片的切换
+
+                    //图片切换
+                    // oAvatar.onclick = function(){
+              //                       if (onOff) {
+              //                               oAvatar.src = 'img2.png';
+              //                               onOff = false;
+              //                       } else {
+              //                               oAvatar.src = 'img1.png';
+              //                               onOff = true;
+              //                       };
+              //               };
+
+                    oSend.onclick = function(){
+                                    if (oMessage.value == '') {
+                                            alert('输入的内容不能为空白');
+                                    }
+                                    else {
+                                            if (onOff) {
+                                                oContent.innerHTML = '<p style="text-align: right"><span style="background: #eee">' + oMessage.value + '</span>' + '<img src="img1.png">' + '</p>' + oContent.innerHTML;
+                                                oMessage.value = '';
+                                        } else {
+                                                oContent.innerHTML = '<p style="text-align: left">' + '<img src="img2.png">' + '<span style="background: #36ff07">' + oMessage.value + '</span></p>' + oContent.innerHTML;
+                                                oMessage.value = '';
+                                        };
+                                    };
+                            };               
+                };
+
+                    $(document).keyup(function(event){
+
+                          if(event.keyCode ==13){
+
+                            $("#send").trigger("click");
+
+                          }
+
+                    });
+ 
+        </script>
+    </head>
+    <body>
+    	<div id="container">
+    		<div id="content"></div>
+    		<div id="footer">
+    			<!-- <img id="avatar" src="img1.png" /> -->
+    			<input id="message" type="text" / >
+    			<button id="send">发送</button>
+    		</div>
+    	</div>
+    </body>
+</html>
